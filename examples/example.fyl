@@ -1,0 +1,74 @@
+// AeroFyl syntax-highlighting fixture.
+use std.io;
+use std.fs;
+
+/* Keywords in this block comment, such as public and return, stay comments. */
+
+struct Point
+{
+    int x;
+    int y;
+}
+
+enum State
+{
+    idle,
+    running,
+    stopped
+}
+
+enum Result
+{
+    ok(int),
+    error(string)
+}
+
+public int add(int x, int y)
+{
+    return x + y;
+}
+
+private void inspect(optional int found, ref Point origin)
+{
+    if (found.hasValue) {
+        int value = found.value;
+        print("value: \\n");
+    } else {
+        print("no value: \\t\\\"");
+    }
+
+    Point copy = origin.value;
+    origin.value = Point { x: copy.x, y: copy.y };
+}
+
+public void main(string[] args)
+{
+    int[4] values = [1, 2, 3, 4];
+    list int nums = [1, 2, 3];
+    nums.push(4);
+    int selected = nums[0];
+    float ratio = 3.14;
+    bool large = true && selected >= 1;
+    char newline = '\\n';
+    string label = "public return byte";
+    int firstByte = label.byte(0);
+    State state = State.running;
+    Result result = Result.ok(add(values[0], selected));
+    optional int found = some(42);
+    optional int missing = none();
+    ref Point pointRef = reference(Point { x: 10, y: 20 });
+
+    for (int index = 0; index < nums.length; index += 1) {
+        while (large) {
+            if (result.is(Result.ok)) {
+                int payload = result.payload(Result.ok);
+                nums[index] *= payload;
+                break;
+            }
+            continue;
+        }
+    }
+
+    inspect(found, pointRef);
+    // keywordPrefix and string.byte remain identifiers/member accesses.
+}

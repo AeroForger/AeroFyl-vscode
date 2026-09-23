@@ -1,0 +1,66 @@
+{
+  "name": "aerofyl-language-support",
+  "displayName": "AeroFyl",
+  "description": "Language support for the AeroFyl programming language",
+  "version": "0.1.0",
+  "publisher": "aerofyl-publisher-placeholder",
+  "license": "Apache-2.0",
+  "icon": "images/aerofyl.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "aerofyl",
+    "language",
+    "syntax",
+    "compiler",
+    "systems-programming"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AeroForger/AeroFyl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AeroForger/AeroFyl/issues"
+  },
+  "homepage": "https://github.com/AeroForger/AeroFyl#readme",
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.1",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
+  },
+  "scripts": {
+    "validate": "node ./scripts/validate.js",
+    "test": "node ./scripts/test-grammar.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "aerofyl",
+        "aliases": [
+          "AeroFyl",
+          "aerofyl"
+        ],
+        "extensions": [
+          ".fyl"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/aerofyl.svg",
+          "dark": "./images/aerofyl.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "aerofyl",
+        "scopeName": "source.aerofyl",
+        "path": "./syntaxes/aerofyl.tmLanguage.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "AeroFyl",
+  "scopeName": "source.aerofyl",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#imports"
+    },
+    {
+      "include": "#declarations"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#literals"
+    },
+    {
+      "include": "#members-and-calls"
+    },
+    {
+      "include": "#operators-and-punctuation"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.aerofyl",
+          "begin": "//",
+          "end": "$"
+        },
+        {
+          "name": "comment.block.aerofyl",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.aerofyl",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.aerofyl",
+              "match": "\\\\[nrt0\\\\\"]"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.aerofyl",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.aerofyl",
+              "match": "\\\\[nrt0\\\\']"
+            }
+          ]
+        }
+      ]
+    },
+    "imports": {
+      "patterns": [
+        {
+          "match": "\\b(use)\\s+(std(?:\\.[A-Za-z_][A-Za-z0-9_]*)+)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.other.module.aerofyl"
+            },
+            "2": {
+              "name": "entity.name.namespace.stdlib.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b(use)\\s+([A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.other.module.aerofyl"
+            },
+            "2": {
+              "name": "entity.name.namespace.module.aerofyl"
+            }
+          }
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "match": "\\b(struct)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.struct.aerofyl"
+            },
+            "2": {
+              "name": "entity.name.type.struct.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b(enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.enum.aerofyl"
+            },
+            "2": {
+              "name": "entity.name.type.enum.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b(public|private)\\s+((?:(?:list|optional|ref)\\s+)*(?:int|byte|float|bool|char|string|void|dynamic|[A-Za-z_][A-Za-z0-9_]*)(?:\\s*\\[\\s*(?:[0-9]+)?\\s*\\])*)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": {
+              "name": "keyword.other.visibility.aerofyl"
+            },
+            "2": {
+              "name": "storage.type.aerofyl"
+            },
+            "3": {
+              "name": "entity.name.function.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\(|,|\\})",
+          "captures": {
+            "1": {
+              "name": "entity.name.enum.variant.aerofyl"
+            }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.aerofyl",
+          "match": "\\b(?:return|if|else|while|for|break|continue)\\b"
+        },
+        {
+          "name": "keyword.other.visibility.aerofyl",
+          "match": "\\b(?:public|private)\\b"
+        },
+        {
+          "name": "keyword.other.declaration.aerofyl",
+          "match": "\\b(?:use|using|print|input)\\b"
+        },
+        {
+          "name": "storage.type.aerofyl",
+          "match": "(?<!\\.)\\b(?:list|optional|ref|int|byte|float|bool|char|string|void|dynamic)\\b"
+        },
+        {
+          "name": "storage.type.struct.aerofyl",
+          "match": "\\bstruct\\b"
+        },
+        {
+          "name": "storage.type.enum.aerofyl",
+          "match": "\\benum\\b"
+        }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.aerofyl",
+          "match": "\\b(?:true|false)\\b"
+        },
+        {
+          "name": "constant.numeric.float.aerofyl",
+          "match": "\\b[0-9]+\\.[0-9]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.aerofyl",
+          "match": "\\b[0-9]+\\b"
+        }
+      ]
+    },
+    "members-and-calls": {
+      "patterns": [
+        {
+          "match": "\\.([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "variable.other.member.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.call.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\.([A-Za-z_][A-Za-z0-9_]*)\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.type.enum.aerofyl"
+            },
+            "2": {
+              "name": "constant.other.enum.variant.aerofyl"
+            }
+          }
+        }
+      ]
+    },
+    "operators-and-punctuation": {
+      "patterns": [
+        {
+          "name": "keyword.operator.aerofyl",
+          "match": "\\+=|-=|\\*=|/=|==|!=|<=|>=|&&|\\|\\||[+*/=<>!-]"
+        },
+        {
+          "name": "punctuation.separator.aerofyl",
+          "match": "[,;:]"
+        },
+        {
+          "name": "punctuation.accessor.aerofyl",
+          "match": "\\."
+        },
+        {
+          "name": "punctuation.section.aerofyl",
+          "match": "[(){}\\[\\]]"
+        }
+      ]
+    }
+  }
+}
