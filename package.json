@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/AeroForger/AeroFyl.git"
+    "url": "https://github.com/AeroForger/AeroFyl-vscode"
   },
   "bugs": {
-    "url": "https://github.com/AeroForger/AeroFyl/issues"
+    "url": "https://github.com/AeroForger/AeroFyl-vscode/issues"
   },
-  "homepage": "https://github.com/AeroForger/AeroFyl#readme",
+  "homepage": "https://github.com/AeroForger/AeroFyl-vscode#readme",
   "devDependencies": {
     "@vscode/vsce": "^3.6.1",
     "vscode-oniguruma": "^2.0.1",
