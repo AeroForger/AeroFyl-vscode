@@ -3,8 +3,8 @@
   "displayName": "AeroFyl",
   "description": "Language support for the AeroFyl programming language",
   "version": "0.1.0",
-  "publisher": "aerofyl-publisher-placeholder",
-  "license": "Apache-2.0",
+  "publisher": "AeroForger",
+  "license": "SEE LICENSE IN LICENSE",
   "icon": "images/aerofyl.png",
   "engines": {
     "vscode": "^1.85.0"
