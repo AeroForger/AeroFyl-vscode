@@ -1,5 +1,7 @@
 # AeroFyl for Visual Studio Code
 
+[VsCode marketplace link](https://marketplace.visualstudio.com/items?itemName=AeroForger.aerofyl)
+
 Language support for [AeroFyl](https://github.com/AeroForger/AeroFyl), a systems-programming language with C-style syntax. This extension recognizes `.fyl` source files and uses the AeroFyl specification as its highlighting source of truth.
 
 ## Included support
