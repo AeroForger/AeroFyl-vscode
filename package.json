@@ -2,7 +2,7 @@
   "name": "aerofyl",
   "displayName": "AeroFyl Support",
   "description": "Language support for the AeroFyl programming language",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "AeroForger",
   "license": "SEE LICENSE IN LICENSE",
   "icon": "images/aerofyl.png",

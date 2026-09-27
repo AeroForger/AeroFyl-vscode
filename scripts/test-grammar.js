@@ -41,7 +41,15 @@ async function main() {
     ['public int add(int x, int y) {', 'add', 'entity.name.function.aerofyl'],
     ['struct Point {', 'Point', 'entity.name.type.struct.aerofyl'],
     ['enum Result {', 'Result', 'entity.name.type.enum.aerofyl'],
+    ['Result.ok(42);', 'Result', 'entity.name.type.enum.aerofyl'],
+    ['Result result = Result.ok(42);', 'Result', 'entity.name.type.aerofyl'],
     ['Result.ok(42);', 'ok', 'constant.other.enum.variant.aerofyl'],
+    ['public int add(int x, int y) {', 'x', 'variable.parameter.aerofyl'],
+    ['public int add(int x, int y) {', 'y', 'variable.parameter.aerofyl'],
+    ['if (true) {} else {}', 'if', 'keyword.control.flow.aerofyl'],
+    ['if (true) {} else {}', 'else', 'keyword.control.flow.aerofyl'],
+    ['while (true) {}', 'while', 'keyword.control.flow.aerofyl'],
+    ['for (int i = 0; i < 2; i += 1) {}', 'for', 'keyword.control.flow.aerofyl'],
     ['string.byte(0);', 'byte', 'variable.other.member.aerofyl'],
     ['bool value = true && false;', 'true', 'constant.language.boolean.aerofyl'],
     ['float ratio = 3.14;', '3.14', 'constant.numeric.float.aerofyl'],
@@ -57,6 +65,18 @@ async function main() {
       scopeAt(line, tokens, text).includes(expectedScope),
       `${JSON.stringify(text)} in ${JSON.stringify(line)} should have ${expectedScope}.`
     );
+  }
+
+  let stack = null;
+  for (const [line, member] of [
+    ['enum Color {', null],
+    ['  red,', 'red'],
+    ['  blue', 'blue'],
+    ['}', null]
+  ]) {
+    const result = grammar.tokenizeLine(line, stack);
+    stack = result.ruleStack;
+    if (member) assert.ok(scopeAt(line, result.tokens, member).includes('entity.name.enum.variant.aerofyl'));
   }
 
   const keywordPrefix = 'int keywordPrefix = 1;';

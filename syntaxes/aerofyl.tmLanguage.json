@@ -109,15 +109,35 @@
           }
         },
         {
-          "match": "\\b(enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
-          "captures": {
+          "begin": "\\b(enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "beginCaptures": {
             "1": {
               "name": "storage.type.enum.aerofyl"
             },
             "2": {
               "name": "entity.name.type.enum.aerofyl"
             }
-          }
+          },
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\(|,|\\}|$)",
+              "captures": {
+                "1": {
+                  "name": "entity.name.enum.variant.aerofyl"
+                }
+              }
+            },
+            {
+              "include": "#keywords"
+            },
+            {
+              "include": "#operators-and-punctuation"
+            }
+          ]
         },
         {
           "match": "\\b(public|private)\\s+((?:(?:list|optional|ref)\\s+)*(?:int|byte|float|bool|char|string|void|dynamic|[A-Za-z_][A-Za-z0-9_]*)(?:\\s*\\[\\s*(?:[0-9]+)?\\s*\\])*)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
@@ -134,10 +154,24 @@
           }
         },
         {
-          "match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\(|,|\\})",
+          "match": "(?<=[(,])\\s*((?:(?:list|optional|ref)\\s+)*(?:int|byte|float|bool|char|string|dynamic|[A-Za-z_][A-Za-z0-9_]*)(?:\\s*\\[\\s*(?:[0-9]+)?\\s*\\])*)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?=[,)])",
           "captures": {
             "1": {
-              "name": "entity.name.enum.variant.aerofyl"
+              "name": "storage.type.aerofyl"
+            },
+            "2": {
+              "name": "variable.parameter.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?=[=;,)\\[])",
+          "captures": {
+            "1": {
+              "name": "entity.name.type.aerofyl"
+            },
+            "2": {
+              "name": "variable.other.aerofyl"
             }
           }
         }
@@ -146,7 +180,7 @@
     "keywords": {
       "patterns": [
         {
-          "name": "keyword.control.aerofyl",
+          "name": "keyword.control.flow.aerofyl",
           "match": "\\b(?:return|if|else|while|for|break|continue)\\b"
         },
         {
@@ -190,6 +224,17 @@
     "members-and-calls": {
       "patterns": [
         {
+          "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\.([A-Za-z_][A-Za-z0-9_]*)\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.type.enum.aerofyl"
+            },
+            "2": {
+              "name": "constant.other.enum.variant.aerofyl"
+            }
+          }
+        },
+        {
           "match": "\\.([A-Za-z_][A-Za-z0-9_]*)",
           "captures": {
             "1": {
@@ -202,17 +247,6 @@
           "captures": {
             "1": {
               "name": "entity.name.function.call.aerofyl"
-            }
-          }
-        },
-        {
-          "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\.([A-Za-z_][A-Za-z0-9_]*)\\b",
-          "captures": {
-            "1": {
-              "name": "entity.name.type.enum.aerofyl"
-            },
-            "2": {
-              "name": "constant.other.enum.variant.aerofyl"
             }
           }
         }
