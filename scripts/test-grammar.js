@@ -50,7 +50,25 @@ async function main() {
     ['if (true) {} else {}', 'else', 'keyword.control.flow.aerofyl'],
     ['while (true) {}', 'while', 'keyword.control.flow.aerofyl'],
     ['for (int i = 0; i < 2; i += 1) {}', 'for', 'keyword.control.flow.aerofyl'],
-    ['string.byte(0);', 'byte', 'variable.other.member.aerofyl'],
+    ['string.byte(0);', 'byte', 'variable.other.member.support.aerofyl'],
+    ['nums.push(4);', 'push', 'variable.other.member.support.aerofyl'],
+    ['result.is(Result.ok);', 'is', 'variable.other.member.support.aerofyl'],
+    ['found.hasValue;', 'hasValue', 'variable.other.member.support.aerofyl'],
+    ['print("hi");', 'print', 'keyword.other.declaration.aerofyl'],
+    ['println("hi");', 'println', 'support.function.stdlib.io.aerofyl'],
+    ['eprintln("hi");', 'eprintln', 'support.function.stdlib.io.aerofyl'],
+    ['readFile("a");', 'readFile', 'support.function.stdlib.fs.aerofyl'],
+    ['exists("a");', 'exists', 'support.function.stdlib.fs.aerofyl'],
+    ['exit(1);', 'exit', 'support.function.builtin.aerofyl'],
+    ['optional int f = some(42);', 'some', 'support.function.builtin.aerofyl'],
+    ['optional int m = none();', 'none', 'support.function.builtin.aerofyl'],
+    ['ref int r = reference(x);', 'reference', 'support.function.builtin.aerofyl'],
+    ['using lexer: scan, Token;', 'using', 'keyword.other.module.aerofyl'],
+    ['using lexer: scan, Token;', 'lexer', 'entity.name.namespace.module.aerofyl'],
+    ['using lexer: scan, Token;', 'scan, Token', 'variable.other.import.aerofyl'],
+    ['println(\\f"hi {name}");', '\\f"', 'string.quoted.double.interpolated.aerofyl'],
+    ['println(\\f"hi {name}");', '{name}', 'variable.other.interpolation.aerofyl'],
+    ['println(\\f"a \\{b\\}");', '\\{', 'constant.character.escape.aerofyl'],
     ['bool value = true && false;', 'true', 'constant.language.boolean.aerofyl'],
     ['float ratio = 3.14;', '3.14', 'constant.numeric.float.aerofyl'],
     ['char newline = \'\\n\';', '\\n', 'constant.character.escape.aerofyl'],
@@ -82,8 +100,15 @@ async function main() {
   const keywordPrefix = 'int keywordPrefix = 1;';
   const keywordTokens = grammar.tokenizeLine(keywordPrefix).tokens;
   assert.ok(
-    !scopeAt(keywordPrefix, keywordTokens, 'keywordPrefix').some((scope) => scope === 'keyword.control.aerofyl'),
+    !scopeAt(keywordPrefix, keywordTokens, 'keywordPrefix').some((scope) => scope === 'keyword.control.flow.aerofyl'),
     'Identifiers containing keyword text must not receive a keyword scope.'
+  );
+
+  const memberLine = 'nums.push(4);';
+  const memberTokens = grammar.tokenizeLine(memberLine).tokens;
+  assert.ok(
+    !scopeAt(memberLine, memberTokens, 'nums').some((scope) => scope === 'entity.name.type.enum.aerofyl'),
+    'Lowercase member accesses must not receive an enum scope.'
   );
 
   console.log('Loaded and tokenized AeroFyl grammar checks successfully.');

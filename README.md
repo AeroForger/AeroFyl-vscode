@@ -5,7 +5,8 @@ Language support for [AeroFyl](https://github.com/AeroForger/AeroFyl), a systems
 ## Included support
 
 - AeroFyl language registration for `.fyl` files
-- Theme-aware TextMate syntax highlighting for documented declarations, types, literals, strings, characters, escapes, imports, members, calls, operators, punctuation, comments, structs, and enums
+- Theme-aware TextMate syntax highlighting for documented declarations, types, literals, strings, interpolated `\f"..."` output literals, characters, escapes, imports (`use`/`using`), members, calls, operators, punctuation, comments, structs, and enums
+- Highlighting for `std.io` (`println`, `eprint`, `eprintln`), `std.fs` (`readFile`, `writeFile`, `readBytes`, `writeBytes`, `exists`), and builtin calls (`exit`, `some`, `none`, `reference`)
 - Standard editor behavior for `//` and `/* ... */` comments, brackets, auto-closing pairs, and C-style brace indentation
 - The unmodified official AeroFyl logo for language and Marketplace branding
 
