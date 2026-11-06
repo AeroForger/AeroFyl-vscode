@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+*.vsix
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor/tool dirs
+.kilo/

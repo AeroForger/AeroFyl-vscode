@@ -133,6 +133,17 @@
     "declarations": {
       "patterns": [
         {
+          "match": "\\b(namespace)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.namespace.aerofyl"
+            },
+            "2": {
+              "name": "entity.name.namespace.aerofyl"
+            }
+          }
+        },
+        {
           "match": "\\b(struct)\\s+([A-Za-z_][A-Za-z0-9_]*)",
           "captures": {
             "1": {
@@ -246,6 +257,10 @@
         {
           "name": "storage.type.enum.aerofyl",
           "match": "\\benum\\b"
+        },
+        {
+          "name": "storage.type.namespace.aerofyl",
+          "match": "\\bnamespace\\b"
         }
       ]
     },
@@ -269,11 +284,15 @@
       "patterns": [
         {
           "name": "support.function.stdlib.io.aerofyl",
-          "match": "(?<!\\.)\\b(?:println|eprint|eprintln)\\b"
+          "match": "\\b(?:println|eprint|eprintln)\\b"
         },
         {
           "name": "support.function.stdlib.fs.aerofyl",
-          "match": "(?<!\\.)\\b(?:readFile|writeFile|readBytes|writeBytes|exists)\\b"
+          "match": "\\b(?:readFile|writeFile|readBytes|writeBytes|exists)\\b"
+        },
+        {
+          "name": "support.function.stdlib.os.aerofyl",
+          "match": "\\bprocess\\b(?=\\s*\\.)"
         },
         {
           "name": "support.function.builtin.aerofyl",
@@ -288,6 +307,30 @@
           "captures": {
             "1": {
               "name": "variable.other.member.support.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\.(println|eprint|eprintln)\\b",
+          "captures": {
+            "1": {
+              "name": "support.function.stdlib.io.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\.(readFile|writeFile|readBytes|writeBytes|exists)\\b",
+          "captures": {
+            "1": {
+              "name": "support.function.stdlib.fs.aerofyl"
+            }
+          }
+        },
+        {
+          "match": "\\.(process)\\b",
+          "captures": {
+            "1": {
+              "name": "support.function.stdlib.os.aerofyl"
             }
           }
         },

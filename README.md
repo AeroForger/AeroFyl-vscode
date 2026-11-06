@@ -5,8 +5,8 @@ Language support for [AeroFyl](https://github.com/AeroForger/AeroFyl), a systems
 ## Included support
 
 - AeroFyl language registration for `.fyl` files
-- Theme-aware TextMate syntax highlighting for documented declarations, types, literals, strings, interpolated `\f"..."` output literals, characters, escapes, imports (`use`/`using`), members, calls, operators, punctuation, comments, structs, and enums
-- Highlighting for `std.io` (`println`, `eprint`, `eprintln`), `std.fs` (`readFile`, `writeFile`, `readBytes`, `writeBytes`, `exists`), and builtin calls (`exit`, `some`, `none`, `reference`)
+- Theme-aware TextMate syntax highlighting for documented declarations, types, literals, strings, interpolated `\f"..."` output literals, characters, escapes, imports (`use`/`using`), members, calls, operators, punctuation, comments, structs, enums, and `namespace` blocks
+- Highlighting for `std.io` (`println`, `eprint`, `eprintln`), `std.fs` (`readFile`, `writeFile`, `readBytes`, `writeBytes`, `exists`), `std.os` (`process` member path), and builtin calls (`exit`, `some`, `none`, `reference`)
 - Standard editor behavior for `//` and `/* ... */` comments, brackets, auto-closing pairs, and C-style brace indentation
 - The unmodified official AeroFyl logo for language and Marketplace branding
 
@@ -27,12 +27,11 @@ npm install
 npm run validate
 npm test
 npm run package
-code --install-extension aerofyl-language-support-0.1.0.vsix
 ```
 
-`npm run package` invokes `vsce package --no-dependencies`; the extension has no runtime dependencies, and this keeps development-only tooling out of the `.vsix`.
+`npm run package` invokes `vsce package --no-dependencies`; the extension has no runtime dependencies, and this keeps development-only tooling out of the `.vsix`. Install the generated `aerofyl-<version>.vsix` with `code --install-extension`.
 
-The `publisher` in `package.json` is deliberately a placeholder. Replace it with the Marketplace publisher account that owns a future release before publishing; do not publish under the placeholder identity.
+The `publisher` in `package.json` is deliberately set for the current release flow. Replace it only if you are publishing under a different Marketplace publisher account.
 
 ## Highlighting limits
 
